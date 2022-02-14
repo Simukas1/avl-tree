@@ -10,18 +10,17 @@ int main()
 	for (int i = 0; i < 10; i++) {
 		node = insert_node(node, i*10);
 	}
-	node = insert_node(node, 15);
-	node = insert_node(node, 25);
-	node = insert_node(node, 120);
-	node = insert_node(node, -10);
-	node = insert_node(node, 6);
 	print(node);
+	printf("I have printed all list\n");
+	node = delete_tree(node);
+	print(node);
+	printf("I have printed all list\n");
 	return 0;
 }
 
 void print(Node* node) {
 	if (node != NULL) {
-		printf("height:%d element:%d ", node->height, node->data);
+		printf("height:%d element:%d \n", node->height, node->data);
 		print(node->left);
 		print(node->right);
 	}

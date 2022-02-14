@@ -19,9 +19,12 @@ Node* rotate_left(Node* a);  //this function will make tree from 2) to 1)
 
 Node* insert_node(Node* node, int data);
 
-Node* delete_node(Node* node);
-
 Node* delete_tree(Node* node);
+
+Node* delete_node(Node* node, int data);
+
+Node* min_value_node(Node* node);
+
 
 #endif
 

@@ -63,6 +63,8 @@ Node* insert_node(Node* node, int data) {
 		return node;
 	}
 
+	node->height = max(return_height(node->left), return_height(node->right)) + 1;
+
 	int balance = get_tree_balance(node);
 
 	if (balance > 1 && data < node->left->data) {
@@ -80,4 +82,76 @@ Node* insert_node(Node* node, int data) {
 		return rotate_left(node);
 	}
 	return node;
+}
+
+Node* min_value_node(Node* node) {
+	Node* curr = node;
+	while (curr->left != NULL) {
+		curr = curr->left;
+	}
+	return curr;
+}
+
+Node* delete_node(Node* node, int data) {
+	if (node == NULL) {
+		return node;
+	}
+	if (data < node->data) {
+		node->left = delete_node(node->left, data);
+	}
+	else if (data > node->data) {
+		node->right = delete_node(node->right, data);
+	}
+	else {
+		if (node->left == NULL || node->right==NULL) {
+			Node* temp = node->left ? node->left : node->right;
+			if (temp == NULL) {
+				temp = node;
+				node = NULL;
+			}
+			else {
+				*node = *temp;
+			}
+			free(temp);
+		}
+		else {
+			Node* temp = min_value_node(node->right);
+			node->data = temp->data;
+			node->right = delete_node(node->right, temp->data);
+		}
+	}
+	if (node == NULL) {
+		return node;
+	}
+	node->height = max(return_height(node->left), return_height(node->right)) + 1;
+	int balance = get_tree_balance(node);
+	if (balance > 1 && get_tree_balance(node->left) >= 0) {
+		return rotate_right(node);
+	}
+	if (balance > 1 && get_tree_balance(node->left) < 0) {
+		node->left = rotate_left(node->left);
+		return rotate_right(node);
+	}
+	if (balance < -1 && get_tree_balance(node->right) <= 0) {
+		return rotate_left(node);
+	}
+	if (balance < -1 && get_tree_balance(node->right)>0) {
+		node->right = rotate_right(node->right);
+		return rotate_left(node);
+	}
+	return node;
+}
+
+Node* delete_tree(Node* node) {
+	if (node->right == NULL && node->left == NULL) {
+		free(node);
+		return node;
+	}
+	if (node->right != NULL) {
+		delete_tree(node->right);
+	}
+	if (node->left != NULL) {
+		delete_tree(node->left);
+	}
+	free(node);
 }
