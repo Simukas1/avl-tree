@@ -2,6 +2,17 @@
 #include <stdlib.h>
 #include "avl_tree.h"
 
+
+Node* rotate_right(Node* b); //this function will make tree from 1) to 2)
+
+Node* rotate_left(Node* a);  //this function will make tree from 2) to 1)
+
+int return_height(Node* node);
+
+int get_tree_balance(Node* node);
+
+Node* min_value_node(Node* node);
+
 struct Node* new_node(int data) {
 	struct Node* node = (Node*)malloc(sizeof(Node));
 	if (node == NULL) {

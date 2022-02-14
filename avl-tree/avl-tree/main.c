@@ -15,6 +15,15 @@ int main()
 	node = delete_tree(node);
 	print(node);
 	printf("I have printed all list\n");
+	for (int i = 0; i < 10; i++) {
+		node = insert_node(node, i * 10);
+	}
+	node = delete_node(node, 10);
+	print(node);
+	printf("I have printed all list\n");
+	node = delete_node(node, -12012);
+	print(node);
+	printf("I have printed all list\n");
 	return 0;
 }
 
