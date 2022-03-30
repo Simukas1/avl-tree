@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "avl_tree.h"
-//2110564
 
 Node* rotate_right(Node* b); //this function will make tree from 1) to 2)
 
